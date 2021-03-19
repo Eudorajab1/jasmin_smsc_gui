@@ -1,1 +1,3 @@
-# jasmin_smsc_gui
+# Jasmin SMSC GUI
+
+
