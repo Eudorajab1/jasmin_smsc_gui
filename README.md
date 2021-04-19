@@ -136,6 +136,16 @@ http://localhost:8000/{yourappname}/index
 In order to stop py4web, you need to hit Control-C on the window where you run it.
 Please refer to the user documentation if you need to change the configs or wish to use different ports etc.
 
+## Check Jasmin Configuration
+Depending on how Jasmin has been installed the following steps should be taken at this stage:
+
+``` 
+telnet <jcli host> <jcli port> 
+$ telnet 0.0.0.0 8990
+username:
+```
+If you see the username: prompt Jasmin is configured correctly and we can proceed to install the GUI
+
 ## Install the application
 
 Now that we have both Jasmin and Py4web configured and running we need to install the Jasmin SMS GUI. This is a Py4Web app so should go in the py4web/apps folder.
@@ -147,10 +157,10 @@ git clone https://github.com/Eudorajab1/jasmin_smsc_gui.git .
 
 Once you have cloned the app you need open the file apps/jasmin_smsc_gui/settings.py in your favourite text edior and change the following:
 
-* JASMIN_HOST
-* JASMIN_PORT
-* JASMIN_USER
-* JASMIN_PWD
+* JASMIN_HOST <as per telnet command>
+* JASMIN_PORT <as per telnet command>
+* JASMIN_USER <as per jasmin config default is "jcliuser">
+* JASMIN_PWD  <as per jasmin config default is "jclipwd">
 
 to reflect your setup.
 
