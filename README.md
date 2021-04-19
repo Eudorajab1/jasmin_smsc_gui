@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 * A working installation of the Jasmin SMS Gateway software with standard jcli port exposed 
 * A working Py4Web installation (either dev or live deployment) which can access jcli port on Jasmin either locally or remotely
 
-Full documentation for the installation and operation of the Jasmin SMS Gateway can be found at https://docs.jasminsms.com/en/latest/index.html 
+Full documentation for the installation and usage for Jasmin SMS Gateway can be found at https://docs.jasminsms.com/en/latest/index.html 
 
 Full documentation for the installation and usage for Py4Web can be found at https://py4web.com/_documentation/static/en/index.html
 
