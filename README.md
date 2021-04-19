@@ -4,12 +4,12 @@ A [Py4web](https://py4web.com/) GUI application for managing and monitoring all 
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See the releveant deployment documentaion for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See the relevant deployment documentaion for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-* A working installation of the Jasmin SMS Gateway software
-* A working Py4Web installation (either dev or live deployment)
+* A working installation of the Jasmin SMS Gateway software with standard jcli port exposed 
+* A working Py4Web installation (either dev or live deployment) which can access jcli port on Jasmin either locally or remotely
 
 Full documentation for the installation and operation of the Jasmin SMS Gateway can be found at https://docs.jasminsms.com/en/latest/index.html 
 
