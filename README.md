@@ -134,53 +134,31 @@ http://localhost:8000/{yourappname}/index
 In order to stop py4web, you need to hit Control-C on the window where you run it.
 Please refer to the user documentation if you need to change the configs or wish to use different ports etc.
 
+## Install the application
+
 Now that we have both Jasmin and Py4web configured and running we need to install the Jasmin SMS GUI. This is a Py4Web app so should go in the py4web/apps folder.
 
 ```
 cd apps
-
-
-E-xplain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
+git clone https://github.com/Eudorajab1/jasmin_smsc_gui.git .
 ```
 
-### And coding style tests
+Once you have cloned the app you need open the file apps/jasmin_smsc_gui/settings.py in your favourite text edior and change the following:
 
-Explain what these tests test and why
+* JASMIN_HOST
+* JASMIN_PORT
+* JASMIN_USER
+* JASMIN_PWD
+to reflect your setup.
 
-```
-Give an example
-```
+Once saved you can restart Py4Web and navigate to http://localhost:8000/jasmin_smsc_gui
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+## Initialise the database
+If you have an existing instance of Jasmin, once you have connected you can run the populate database function from the superadmin menu which will import all current groups, users, connectors, filters etc from you instance of Jasmin. 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **John Bannister** - *Initial work* - [Eurodrajab1](https://github.com/Eudorajab1)
 
 ## License
 
@@ -188,6 +166,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Hat tip to the Jookies/Jasmin and Py4web teams for their stirling products
