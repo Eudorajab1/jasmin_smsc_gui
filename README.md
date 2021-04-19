@@ -4,30 +4,29 @@ A [Py4web](https://py4web.com/) GUI application for managing and monitoring all 
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See the relevant deployment documentaion for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See the relevant deployment documentaion for notes on how to deploy the project on a live system. Installation and setup will vary depending on your operating system and preferred installation method and are covered in great detail in the respective documentation
 
 ### Prerequisites
 
-* A working installation of the Jasmin SMS Gateway software with standard jcli port exposed 
+* Python 3
+* A working installation of the Jasmin SMS Gateway software with standard jcli port exposed (can be a docFoker container) 
 * A working Py4Web installation (either dev or live deployment) which can access jcli port on Jasmin either locally or remotely
-
-Full documentation for the installation and usage for Jasmin SMS Gateway can be found at https://docs.jasminsms.com/en/latest/index.html 
-
-Full documentation for the installation and usage for Py4Web can be found at https://py4web.com/_documentation/static/en/index.html
-
-```
-Give examples
-```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+Depending on your requirements and OS installation will vary. 
+Full documentation for the installation and usage for Jasmin SMS Gateway can be found at https://docs.jasminsms.com/en/latest/index.html 
+Full documentation for the installation and usage for Py4Web can be found at https://py4web.com/_documentation/static/en/index.html
 
-Say what the step will be
+Example:
+To set up a development environment on a Windows 10 machine with WSL2 (Ubuntu) and a dockerised Jasmin follow these steps: 
+
 
 ```
-Give the example
+$ docker-compose --version
+docker-compose version 1.28.5, build c4eb3a1f
 ```
+If docker is not installed you will need to install it before proceeding
 
 And repeat
 
