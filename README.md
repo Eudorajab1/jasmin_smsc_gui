@@ -88,7 +88,7 @@ Start the Jasmin container
 ```
 $ docker-compose up
 ```
-Check that Jasmin is up and running
+Check that Jasmin and dependancies are up and running
 ```
 $ docker ps
 CONTAINER ID   IMAGE                 COMMAND                  CREATED      STATUS      PORTS                                                                    NAMES
@@ -99,13 +99,33 @@ f4cc24abd695   jookies/jasmin:0.10   "/docker-entrypoint.…"   3 days ago   Up 
 ```
 Please refer to the Jasmin manual for troubleshooting if needed 
 
-
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
+Create a python3 virtual environment in the location of your choice or follow py4web installation procedures for deployment
+```
+$ cd /opt
+$ python3 -m venv py4web
+```
+Activate the virtual environment
+```
+$ source py4web/bin/activate
+(py4web)$
+```
+Install Py4Web in the newly created virtual environment
+```
+(py4web)$ cd py4web
+(py4web)$ python3 -m pip install --upgrade py4web --no-cache-dir
+```
+Hint: If python3 doesnt work try using just pyhon instead.
+This will install py4web and all its dependencies on the system’s path only. The assets folder (that contains the py4web’s system apps) will also be created. After the installation you’ll be able to start py4web on any given working folder with
+```
+py4web setup apps
+py4web set_password
+py4web run apps
+```
+## First Run
+```
+$ py4web run apps
+```
+E-xplain how to run the automated tests for this system
 
 ### Break down into end to end tests
 
