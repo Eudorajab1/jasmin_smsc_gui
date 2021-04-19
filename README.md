@@ -9,7 +9,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 * Python 3
-* A working installation of the Jasmin SMS Gateway software with standard jcli port exposed (can be a docFoker container) 
+* A working installation of the Jasmin SMS Gateway software with standard jcli port exposed (can be a docker container) 
 * A working Py4Web installation (either dev or live deployment) which can access jcli port on Jasmin either locally or remotely
 
 ### Installing
@@ -30,7 +30,7 @@ docker-compose version 1.28.5, build c4eb3a1f
 ```
 If docker is not installed you will need to install it before proceeding
 
-Create a directory to store your docker-compose file
+Create a directory of your choice to store your docker-compose file
 
 ```
 $ mkdir /opt/scripts/jasmin
