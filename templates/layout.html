@@ -19,7 +19,7 @@
     <nav class="navbar is-light" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="../index">
-          <span class="has-text-primary"><h1><strong>Jasmin SMS</strong></h1></span><strong>&nbsp;Gateway GUI</strong>
+          <span class="has-text-primary"><strong><i class="fa fa-home has-text-primary"></i> Jasmin SMS</strong></span><strong>&nbsp;Gateway GUI</strong>
         </a>
 	    	<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="left-navbar"
            onclick="this.classList.toggle('is-active');document.getElementById(this.dataset.target).classList.toggle('is-active');">
@@ -32,6 +32,7 @@
         <div class="navbar-start">
 	      [[block page_menu_items]]<!-- individual pages can add menu items here -->[[end]]
         </div>
+        <!--
         <div id="left-navbar" class="navbar-menu">
           <div class="navbar-end">
             <div class="navbar-item">
@@ -46,23 +47,15 @@
            </div>
           </div>
         </div>
+        -->
      </nav>
     [[if globals().get('flash'):]]
     <div id="flash" class="notification is-primary has-text-centered">
       <button onclick="jQuery('#flash').hide();"class="delete" aria-label="delete"></button>
       <flash-alerts data-alert="[[=globals().get('flash','')]]"></flash-alerts>
     </div>
-    <!--
-     <article id="flash" class="message is-primary">
-      <div class="message-header container">
-          <flash-alerts data-alert="[[=globals().get('flash','')]]"></flash-alerts>
-        <button onclick="jQuery('#flash').hide();"class="delete" aria-label="delete"></button>
-      </div>
-    </article>
-    -->
   [[pass]]    
   <section class="box">
-    
     [[include]]
     <div class="sidebar">
       [[block mysidebar]]
@@ -73,9 +66,8 @@
       <footer class="footer">
       <div class="content has-text-centered">
         <p>
-          <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-          is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+          
+          Powered By <strong>Py4web</strong> <a href="https://py4web.com"></a>
         </p>
       </div>
     </footer>

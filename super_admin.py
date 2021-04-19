@@ -2,8 +2,8 @@ from py4web import action, request, abort, redirect, URL
 from yatl.helpers import A
 from .common import db, session, T, cache, auth, logger, authenticated, unauthenticated, flash
 from .user_manager import list_users, list_groups
-    
 from .common import jasmin
+
 def get_groups():
     return list_groups()
 
@@ -64,7 +64,6 @@ def get_users():
             )
             print('User_creds', user_creds['uid'], u_id)
     return users
-
 
 def get_filters():
     from .filter_manager import list_filters
@@ -248,7 +247,6 @@ def get_moroutes():
     from .route_manager import mo_routes
     routes = mo_routes()
     for route in routes:
-        print('ROUTE', route)
         c_split = route['r_connectors'].split()
         cids = []
         fids = []
@@ -262,9 +260,7 @@ def get_moroutes():
             else:
                 c = db(db.http_cons.hcon_cid == connector).select().first()
                 cidh.append(c.id)
-                print('MT ROUTES RE HTTP CONNECTORS', con, connector )    
         f_split = route['r_filters'].split('>,')
-        print('FSPLIT', f_split)
         for f in f_split:
             f_type = ''
             f_val = ''
@@ -332,15 +328,12 @@ def get_moroutes():
             fid = get_fid(f_type, f_val)
             fids.append(fid)
         # now after all this update the records
-        print(route['r_order'], route['r_type'], cids, cidh, fids)
         ret = db.moroute.update_or_insert(db.moroute.mo_order == route['r_order'],
                     mo_order = route['r_order'],
                     mo_type = route['r_type'], 
                     mo_connectors = cids,
                     mo_http_cons = cidh,
                     mo_filters = fids)
-        print('RET', ret)
-                    
     rows = db(db.moroute.id > 0).select()
     return dict(rows=rows)
 
@@ -349,7 +342,6 @@ def get_imos():
     
 def get_imts():
     return 'Isnside get_imts'
-
 
 @action("populate_database", method=['GET', 'POST'])
 @action.uses(db, session, auth, flash, "generic.html")
@@ -363,15 +355,8 @@ def popualate_database():
     mo_routes = get_moroutes()
     mo_interceptors = get_imos()
     mt_interceptors = get_imts()
-    return dict(groups=groups, 
-                users=users,
-                filters=filters,
-                smpp_cons = smpp_cons,
-                http_cons=http_cons,
-                mt_routes=mt_routes,
-                mo_routes=mo_routes,
-                mo_interceptors = mo_interceptors,
-                mt_interceptors = mt_interceptors)
+    flash.set('Database populated with existing Jasmin data')
+    redirect(URL('index'))
 
 
 @action("super_admin", method=['GET', 'POST'])
