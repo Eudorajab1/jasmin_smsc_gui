@@ -1,0 +1,35 @@
+[[extend 'layout.html']]
+<div class="row"> 
+  <div id="web2py_user_form" class="col-lg-8" style="background-color:white; margin: 0 auto 5px auto; box-shadow: 0 0 5px #a1a1a1; border-radius:5px;padding: 20px">
+    <div id="record_content" class="card">
+      <div class="card-body">
+        <div class="columns">
+            <div class="column is-4">
+                <a href="[[=caller]]">
+                    <button type="button" class="btn btn-outline-primary btn-sm">
+                        <i class="fa fa-arrow-circle-left">  Back</i>
+                    </button>
+                </a>
+            </div>
+            <div class="column">     
+                <div class="subtitle">[[=title]]</div>
+            </div>
+        </div>      
+      <div>
+        [[=content]]
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$(document).ready(function() {
+  $('.select').select2({
+  placeholder: 'Select an option',
+  width:'50%',
+  id: "value attribute" || "option text",
+  text: "label attribute" || "option text",
+  element: HTMLOptionElement  
+
+});
+});
+</script>

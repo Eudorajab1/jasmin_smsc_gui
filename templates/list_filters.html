@@ -1,0 +1,56 @@
+[[extend 'layout.html']]
+
+<div id="show_form">
+  
+  <a onclick="jQuery('#form').slideToggle();jQuery('#filters').slideToggle();"> 
+      <button type="button" class="btn btn-outline-info btn-sm"><i class="fa fa-list text-info"></i>
+      Toggle List/Add
+      </button>
+    </a>
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <div id="form" class="box">
+          [[=form]]
+        </div>
+      </div>
+    </div>
+</div>
+<div id="filters" class="box">
+    <div class="box-header">
+        <div class="subtitle">List Filters</div>
+    </div>
+    <div class="card-body">
+        <table id="list_filters" class="display compact" style="width:100%">
+            <thead>
+              <tr>
+                 <th>Filter Id</th><th>Type</th><th>Route</th><th>Value</th><th>Options</th>
+              </tr>
+            </thead>
+            <tbody>
+                [[for con in filters:]]
+                <tr>
+                    <td>[[=con['filter_id'] ]]</td>
+                    <td>[[=con['filter_type'] ]]</td>
+                    <td>[[=con['route'] ]]</td>
+                    <td>[[=con['description'] ]]</td>
+                    <td><a href="[[=URL('delete_filter', con['filter_id']) ]]">
+                        <button type="button" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-trash text-danger"></i>&nbsp;Delete</button>
+                        </a>
+                    </td>
+                </tr>
+                [[pass]]
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+  $(document).ready(function() {
+    $('.select').select2({
+    placeholder: 'Select an option',
+    width:'50%'  
+    });
+    $('#list_filters').DataTable();
+      [[if form and not form.errors:]]jQuery('#form').hide();[[pass]]
+  });
+</script>

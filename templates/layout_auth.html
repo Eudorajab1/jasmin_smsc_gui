@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="[[=URL('static')]]/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAAQEAAAEAIAAwAAAAFgAAACgAAAABAAAAAgAAAAEAIAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAAAAAA=="/>
+    <link rel="stylesheet" href="css/no.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    
+    <style>.py4web-validation-error{margin-top:-16px; font-size:0.8em;color:red}</style>
+    [[block page_head]]<!-- individual pages can customize header here -->[[end]]
+  </head>
+  <body>
+    <header>
+      <!-- Navigation bar -->
+      <!-- Navigation bar -->
+      <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="../index">
+            <span class="has-text-primary"><strong>Jasmin SMS</strong></span><strong>&nbsp;Gateway GUI</strong>
+          </a>
+        
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="left-navbar"
+             onclick="this.classList.toggle('is-active');document.getElementById(this.dataset.target).classList.toggle('is-active');">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+        <div id="left-navbar" class="navbar-menu">
+          <div class="navbar-start">
+      [[block page_menu_items]]<!-- individual pages can add menu items here -->[[end]]
+  
+      </div>
+        <div id="left-navbar" class="navbar-menu">
+          
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                [[if globals().get('user'):]]
+                <a class="button is-small is-primary" href="[[=URL('auth/logout')]]">Sign out</a>
+                [[else:]]
+                <a class="button is-small is-primary" href="[[=URL('auth/register')]]">Sign up</a>
+                <a class="button is-small is-light" href="[[=URL('auth/login')]]">Sign in</a>
+                [[pass]]
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- beginning of HTML inserted by extending template -->
+    <center>
+      <div>
+        <!-- Flash alert messages, first optional one in data-alert -->
+        <flash-alerts class="padded" data-alert="[[=globals().get('flash','')]]"></flash-alerts>
+      </div>
+      <main class="padded">
+        <!-- contect injected by extending page -->
+        [[include]]
+      </main>
+    </center>
+    <!-- end of HTML inserted by extending template -->
+    <footer class="black padded">
+      <p>
+        Made with py4web
+      </p>
+    </footer>
+  </body>
+  <!-- You've gotta have utils.js -->
+  <script src="js/utils.js"></script>
+  [[block page_scripts]]<!-- individual pages can add scripts here -->[[end]]
+</html>

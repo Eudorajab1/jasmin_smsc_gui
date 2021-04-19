@@ -1,4 +1,4 @@
-[[extend "layout.html"]]
+[[extend "layout_auth.html"]]
 <style>
   .auth-container {
     max-width: 80%;
@@ -10,6 +10,10 @@
     padding: 20px;
   }
 </style>
+[[block page_head]]
+  
+[[end]]
+
 <div class="auth-container">
   [[=form]]
 </div>

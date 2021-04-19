@@ -1,0 +1,126 @@
+[[extend 'layout.html']]
+<div id="users" class="box">
+  <table id="s_user_list" class="display compact" style="width:100%">
+  <thead>
+    <tr>
+      <th>User ID</th><th>Group ID</th><th>User Name</th><th>HTTP Bal.</th><th>SMPP Bal.</th><th>HTTP Thruput</th><th>SMPP Thruput</th><th>Actions</th>
+  </thead>
+  <tbody>
+    [[for con in users:]]
+    <tr>
+      [[if con['uid'][0] == '!':]]
+        <td>
+          <span class="icon is-danger">
+            <i class="fas fa-stop-circle" style="color:red"></i>
+          </span>
+          <span>
+            [[=con['uid'] ]]
+          </span>
+        </td>    
+        [[else:]]
+          <td>
+            <span class="icon is-success">
+              <i class="fas fa-check-square" style="color:green"></i>
+            </span>
+            <span>
+              [[=con['uid'] ]]
+            </span>
+          </td>    
+        [[pass]]
+        [[if con['gid'][0] == '!':]]
+          <td>
+            <span class="icon is-success">
+              <i class="fas fa-stop-circle" style="color:red"></i>
+            </span>
+            <span>
+              [[=con['gid'] ]]
+            </span>
+          </td>
+        [[else:]]
+          <td>
+            <span class="icon is-success">
+              <i class="fas fa-check-square" style="color:green"></i>
+            </span>
+            <span>
+              [[=con['gid'] ]]
+            </span>
+          </td>    
+        [[pass]]
+          <td>[[=con['username'] ]]</td>
+          [[if con['balanceh'][0] == 'N':]]
+            <td>
+              <span class="icon is warning">
+                <i class="fas fa-exclamation" style="color:red "></i>
+              </span>
+              <span>  
+                ND
+              </span>
+            </td>    
+        [[else:]]
+          <td>
+            [[=con['balanceh'] ]]
+          </td>    
+        [[pass]]
+        [[if con['balances'][0] == 'N':]]
+          <td>
+            <span class="icon is warning">
+              <i class="fas fa-exclamation" style="color:red "></i>
+            </span>
+            <span>  
+              ND
+            </span>
+          </td>    
+        [[else:]]
+          <td>
+            [[=con['balances'] ]]
+          </td>    
+        [[pass]]
+        [[if con['mt_http'][0] == 'N':]]
+          <td>
+            <span class="icon is warning">
+              <i class="fas fa-exclamation" style="color:red "></i>
+            </span>
+            <span>  
+              ND
+            </span>
+          </td>    
+        [[else:]]
+          <td>
+            [[=con['mt_http'] ]]
+          </td>    
+        [[pass]]
+        [[if con['mt_smpp'][0] == 'N':]]
+          <td>
+            <span class="icon is warning">
+              <i class="fas fa-exclamation" style="color:red "></i>
+            </span>
+            <span>  
+              ND
+            </span>
+          </td>    
+        [[else:]]
+          <td>
+            [[=con['mt_smpp'] ]]
+          </td>    
+        [[pass]]
+          <td>
+            <a href="[[=URL('s_users', con['uid'], 'unbind') ]]" >
+              <button type="button" class="btn btn-outline-danger btn-sm">
+                <i class="fa fa-toggle-off text-danger"></i> Unbind User</button>
+            </a>
+            <a href="[[=URL('s_users', con['uid'], 'ban') ]]" >
+              <button type="button" class="btn btn-outline-danger btn-sm">
+                <i class="fa fa-toggle-off text-danger"></i> Ban User</button>
+            </a>
+          </td>
+        </tr>
+        [[pass]]
+    </tbody>
+    </table>
+</div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#s_user_list').DataTable();
+    });
+</script>

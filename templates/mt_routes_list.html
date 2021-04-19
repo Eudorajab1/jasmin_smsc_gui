@@ -1,0 +1,70 @@
+[[extend 'layout.html']]
+<div id="show_form">
+    <a onclick="jQuery('#form').slideToggle();jQuery('#routes').slideToggle();"> 
+      <button type="button" class="btn btn-outline-info btn-sm"><i class="fa fa-list text-info"></i>
+      Toggle List/Add
+      </button>
+    </a>
+    <div class="columns is-centered">
+    <div class="column is-6">
+      <div id="form" class="box">
+        [[=form]]
+      </div>
+    </div>
+  </div>
+</div>
+<div id="routes" class="box">
+    <div class="box-header">
+        <div class="subtitle">List MT Routes</div>
+    </div>
+    <div class="card-body">
+      <table id="mt_routes" class="table table-bordered table-striped table-sm" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                  <th>Route Order</th><th>Type</th><th>Rate</th><th>Connector ID(s)</th><th>Filter(s)</th><th>MT Router Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                [[for rt in routes:]]
+                <tr>
+                    <td>[[=rt['r_order'] ]]</td>
+                    <td>[[=rt['r_type'] ]]</td>
+                    [[if rt['r_rate'][2]== '!':]]
+                    <td>    
+                      <span class="icon is warning">
+                        <i class="fas fa-exclamation" style="color:red "></i>
+                      </span>
+                      <span>  
+                        0.00
+                      </span>
+                    </td>
+                        
+                    [[else:]] 
+                        <td>
+                            [[=rt['r_rate'] ]]
+                        </td>    
+                    [[pass]]
+                    <td>[[=rt['r_connectors'] ]]</td>
+                    <td>[[=rt['r_filters'] ]]</td>
+                    <td>
+                        <a href="[[=URL('remove_mt_route', rt['r_order']) ]]" >
+                            <button type="button" class="btn btn-outline-info btn-sm">
+                                <i class="fa fa-trash text-danger"></i> Delete</button>
+                        </a>
+                    </td>
+                </tr>
+                [[pass]]
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <script>
+      $(document).ready(function() {
+        $('.select').select2({
+        placeholder: 'Select an option',
+        width:'50%'
+      });
+      $('#mt_routes').DataTable()
+      [[if form and not form.errors:]]jQuery('#form').hide();[[pass]]
+      });
+    </script>

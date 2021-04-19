@@ -8,7 +8,12 @@ from .models import db
 
 # by importing controllers you expose the actions defined in it
 from . import controllers
-
+from . import super_admin
+from . import filter_manager
+from . import connector_manager
+from . import route_manager
+from . import stats
+from . import interceptor_manager
 # optional parameters
 __version__ = "0.0.0"
 __author__ = "you <you@example.com>"

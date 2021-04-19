@@ -1,0 +1,37 @@
+[[extend 'layout.html']]
+<div class="columns is-centered">
+  <div class="column is-6">
+    <div class="box">
+      <div class="box-header" id="back_button">
+        <a href="[[=caller]]">
+        <button type="button" class="btn btn-outline-primary btn-sm">
+            <i class="fa fa-arrow-circle-left">  Back</i>
+        </button>
+        </a>
+        </div>
+       <div class="table-container">
+        <table class="table is-bordered is-striped">
+        <thead>
+          <tr>
+            <th>Field</th><th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          [[for row in rows:]]
+          <tr>
+            <td>
+              [[=row[0] ]]
+            </td>
+            <td>
+              [[=row[1] ]]
+            [[pass]] 
+        </tbody>
+        </table>
+        <div>
+    </div>
+    <div class="box-footer" id="back_button">
+        <a href="[[=caller]]"><button type="button" class="btn btn-default "><i class="fa fa-arrow-circle-left">  Back</i></button></a>
+       </div>
+  </div>
+</div>
+

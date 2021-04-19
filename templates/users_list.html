@@ -1,0 +1,159 @@
+[[extend 'layout.html']]
+<div id="show_form">
+  <a onclick="jQuery('#form').slideToggle();jQuery('#users').slideToggle();"> 
+    <button type="button" class="btn btn-outline-info btn-sm"><i class="fa fa-list text-info"></i>
+    Toggle List/Add
+    </button>
+  </a>
+  <div class="columns is-centered">
+  <div class="column is-6">
+    <div id="form" class="box">
+      [[=form]]
+    </div>
+  </div>
+</div>
+</div>
+    <div id="users" class="box">
+      <table id="user_list" class="display compact" style="width:100%">
+        <thead>
+          <tr>
+            <th>User ID</th><th>Group ID</th><th>User Name</th><th>HTTP Bal.</th><th>SMPP Bal.</th><th>HTTP Thruput</th><th>SMPP Thruput</th><th>Actions</th>
+        </thead>
+        <tbody>
+        [[for con in users:]]
+          <tr>
+            [[if con['uid'][0] == '!':]]
+            <td>
+              <span class="icon is-danger">
+                <i class="fas fa-stop-circle" style="color:red"></i>
+              </span>
+              <span>
+                [[=con['uid'] ]]
+              </span>
+            </td>    
+            [[else:]]
+              <td>
+                <span class="icon is-success">
+                  <i class="fas fa-check-square" style="color:green"></i>
+                </span>
+                <span>
+                  [[=con['uid'] ]]
+                </span>
+              </td>    
+            [[pass]]
+            [[if con['gid'][0] == '!':]]
+            <td>
+              <span class="icon is-success">
+                <i class="fas fa-stop-circle" style="color:red"></i>
+              </span>
+              <span>
+                [[=con['gid'] ]]
+              </span>
+            </td>
+            [[else:]]
+            <td>
+              <span class="icon is-success">
+                <i class="fas fa-check-square" style="color:green"></i>
+              </span>
+              <span>
+                [[=con['gid'] ]]
+              </span>
+            </td>    
+            [[pass]]
+              <td>[[=con['username'] ]]</td>
+              [[if con['balanceh'][0] == 'N':]]
+                <td>
+                  <span class="icon is warning">
+                    <i class="fas fa-exclamation" style="color:red "></i>
+                  </span>
+                  <span>  
+                    ND
+                  </span>
+                </td>    
+              [[else:]]
+                <td>
+                    [[=con['balanceh'] ]]
+                </td>    
+              [[pass]]
+              [[if con['balances'][0] == 'N':]]
+              <td>
+                <span class="icon is warning">
+                  <i class="fas fa-exclamation" style="color:red "></i>
+                </span>
+                <span>  
+                  ND
+                </span>
+              </td>    
+              [[else:]]
+                <td>
+                      [[=con['balances'] ]]
+                </td>    
+              [[pass]]
+              [[if con['mt_http'][0] == 'N':]]
+              <td>
+                <span class="icon is warning">
+                  <i class="fas fa-exclamation" style="color:red "></i>
+                </span>
+                <span>  
+                  ND
+                </span>
+              </td>    
+              [[else:]]
+                <td>
+                    [[=con['mt_http'] ]]
+                </td>    
+              [[pass]]
+              [[if con['mt_smpp'][0] == 'N':]]
+              <td>
+                <span class="icon is warning">
+                  <i class="fas fa-exclamation" style="color:red "></i>
+                </span>
+              <span>  
+                ND
+              </span>
+              </td>    
+              [[else:]]
+                <td>
+                    [[=con['mt_smpp'] ]]
+                </td>    
+              [[pass]]
+              <td>
+                <a href="[[=URL('user_credentials', con['uid'])]]">
+                  <button type="button" class="btn btn-outline-primary btn-sm">
+                    <i class="fa fa-user text-info"></i> Creds</button>
+                </a>
+                <a href="[[=URL('manage_users', con['uid'], 'disable') ]]" >
+                  <button type="button" class="btn btn-outline-primary btn-sm">
+                    <i class="fa fa-toggle-off text-warning"></i> Disable</button>
+                </a>
+                <a href="[[=URL('manage_users', con['uid'], 'enable')]]">
+                  <button type="button" class="btn btn-outline-primary btn-sm">
+                    <i class="fa fa-toggle-on text-success"></i> Enable</button>
+                </a>
+                <a href="[[=URL('manage_users', con['uid'], 'remove')]]">
+                  <button type="button" class="btn btn-outline-primary btn-sm">
+                    <i class="fa fa-trash text-danger"></i> Delete</button>
+                </a>
+                
+              </td>
+            </tr>
+          [[pass]]
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+      $('.select').select2({
+      placeholder: 'Select an option',
+      width:'50%',
+      
+    });
+    $('#user_list').DataTable();
+      
+      [[if form and not form.errors:]]
+      jQuery('#form').hide();
+      [[pass]]
+    });
+  
+    </script>

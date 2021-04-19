@@ -1,0 +1,42 @@
+[[extend 'layout.html']]
+<script>
+$(document).ready(function() { 
+   jQuery('#smppccs_stats').DataTable({
+    "scrollY": true,
+    "scrollX": true
+   });
+});
+</script>
+<div class="box" >
+    <div class="columns">
+        <div class="column is-4">
+            <a href="[[=URL('stats')]]"><button type="button" class="btn btn-outline-info "><i class="fa fa-arrow-circle-left">  Back</i></button></a>
+        </div>
+        <div class="column">
+            <div class="title">SMPP Connectors Stats</div>
+        </div>
+    </div>
+    <table id="smppccs_stats" class="display compact" style="width:100%" >
+        <thead>
+            <tr>
+                <th>Connector ID</th><th>Connected at</th><th>Bound at</th><th>Disconnected at</th><th>Submits</th><th>Delivers</th><th>QOS Errors</th><th>Other Errors</th><th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            [[for con in cons:]]
+            <tr>
+                <td>[[=con['cid'] ]]</td>
+                <td>[[=con['ca'] ]]</td>
+                <td>[[=con['ba'] ]]</td>
+                <td>[[=con['da'] ]]</td>
+                <td>[[=con['sm'] ]]</td>
+                <td>[[=con['dl'] ]]</td>
+                <td>[[=con['qos'] ]]</td>
+                <td>[[=con['other'] ]]</td>
+                <td><a href="[[=URL('smppc_stats', con['cid'])]]" ><button type="button" class="btn btn-outline-info btn-sm"><i class="fa fa-chart-line text-success"></i> Stats</button></a>
+                </td>
+            </tr>
+            [[pass]]
+        </tbody>
+    </table>
+</div>

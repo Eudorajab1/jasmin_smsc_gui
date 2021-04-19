@@ -1,0 +1,119 @@
+[[extend 'layout.html']]
+<script>
+$(document).ready(function() { 
+   jQuery('#connector_list').DataTable()
+    [[if form and not form.errors:]]jQuery('#form').hide();jQuery('#connectors').show();[[pass]]
+});    
+</script>
+<div id="show_form">
+    <a onclick="jQuery('#form').slideToggle();jQuery('#connectors').slideToggle();"> 
+      <button type="button" class="btn btn-outline-info btn-sm"><i class="fa fa-list text-info"></i>
+      Toggle List/Add
+      </button>
+    </a>
+    <div class="columns is-centered">
+    <div class="column is-6">
+      <div id="form" class="box">
+        [[=form]]
+      </div>
+    </div>
+  </div>
+</div>
+<div id="connectors" class="box">
+  <div class="box-header">
+    <h4 class="subtitle">SMPP Connector List </h4>
+    </div>
+    <div class="card-body">
+        <table id="connector_list" class="display compact" style="width:100%">
+            <thead>
+              <tr>
+                <th>CID</th><th>Status</th><th>Host</th><th>Port</th><th>Username</th><th>Pasword</th><th>Session</th><th>Starts</th><th>Stops</th><th>Options</th>
+              </tr>
+            </thead>
+            <tbody>
+                [[for con in cons:]]
+                <tr>
+                    <td>[[=con['cid'] ]]</td>
+                    [[if con['status'] == 'started':]]
+                    <td>
+                      <span class="icon">
+                        <i class="fas fa-check-square" style="color:green"></i>
+                      </span>
+                      <span>
+                        [[=con['status'] ]]
+                      </span>
+                    </td>
+                    [[else:]]
+                      <td>
+                        <span class="icon">
+                          <i class="fas fa-stop-circle" style="color:red"></i>
+                        </span>
+                        <span>
+                          [[=con['status'] ]]
+                        </span>
+                      </td>
+                    [[pass]]
+                    [[conn = db(db.connector.name ==con['cid']).select().first()]]
+                    [[if conn:]]
+                        <td>[[=conn.c_host]]</td>
+                        <td>[[=conn.c_port]]</td>
+                        <td>[[=conn.c_username]]</td>
+                        <td>[[=conn.c_password]]</td>
+            
+                    [[else:]]
+                        <td>"ND"</td>
+                        <td>"ND"</td>
+                        <td>"ND"</td>
+                        <td>"ND"</td>
+                    [[pass]]
+                    [[if con['session'][0]== 'B':]]
+                      <td>
+                        <span class="icon">
+                          <i class="fas fa-check-square" style="color:green"></i>
+                        </span>
+                        <span>
+                          [[=con['session'] ]]
+                        </span>
+                      </td>
+                    [[else:]]
+                      <td>
+                        <span class="icon">
+                          <i class="fas fa-stop-circle" style="color:red"></i>
+                        </span>
+                        <span>
+                          [[=con['session'] ]]
+                        </span>
+                      </td>  
+                    [[pass]]
+    
+                    <td>[[=con['starts'] ]]</td>
+                    <td>[[=con['stops'] ]]</td>
+                    <td><a href="[[=URL('start_smpp_connector',con['cid']) ]]">
+                      <button type="button" class="btn btn-outline-primary btn-sm">
+                        <i class="fa fa-toggle-on text-success"></i> Start</button>
+                      </a>
+                      <a href="[[=URL('stop_smpp_connector',con['cid']) ]]">
+                        <button type="button" class="btn btn-outline-primary btn-sm">
+                          <i class="fa fa-toggle-off text-danger"></i> Stop</button>
+                      </a>
+                      <a href="[[=URL('edit_smpp_connector',con['cid']) ]]">
+                        <button type="button" class="btn btn-outline-primary btn-sm">
+                          <i class="fa fa-edit text-info"></i> Edit</button>
+                      </a>
+                      <a href="[[=URL('show_smpp_connector',con['cid']) ]]">
+                        <button type="button" class="btn btn-outline-primary btn-sm">
+                          <i class="fas fa-binoculars text-warning"></i></i> Show</button>
+                      </a>
+                      <a href="[[=URL('remove_smpp_connector',con['cid']) ]]">
+                        <button type="button" class="btn btn-outline-primary btn-sm">
+                          <i class="fas fa-trash text-danger"></i> Delete</button>
+                      </a>
+        
+                    </td>
+                </tr>
+                [[pass]]
+                </tbody>
+                </table>
+            </div>
+        </div>
+</div>

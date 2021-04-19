@@ -1,0 +1,6 @@
+databases/*
+uploads/*
+*.py[oc]
+password.txt
+*.log
+*.db

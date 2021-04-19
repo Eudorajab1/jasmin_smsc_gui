@@ -1,0 +1,56 @@
+[[extend 'layout.html']]
+<script>
+    $(document).ready(function() {
+      $('.select').select2({
+      placeholder: 'Select an option',
+      width:'50%',
+    });
+    $('#mt_interceptors').DataTable();
+        [[if form and not form.errors:]]jQuery('#form').hide();[[pass]]
+    });
+</script>
+ 
+<div id="show_form">
+    <a onclick="jQuery('#form').slideToggle();jQuery('#interceptors').slideToggle();"> 
+      <button type="button" class="btn btn-outline-info btn-sm"><i class="fa fa-list text-info"></i>
+      Toggle List/Add
+      </button>
+    </a>
+    <div class="columns is-centered">
+    <div class="column is-6">
+      <div id="form" class="box">
+        [[=form]]
+      </div>
+    </div>
+  </div>
+</div>
+<div id="interceptors" class="box">
+    <div class="box-header">
+        <div class="subtitle">[[=title]]</div>
+    </div>
+    <div class="card-body">
+        <table id="mt_interceptors" class="table table-sm table-striped table-hover table-bordered">
+            <thead>
+              <tr>
+                 <th>Order</th><th>Type</th><th>Script</th><th>Filters</th><th>Availabe Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                [[for imt in imts:]]
+                <tr>
+                    <td>[[=imt['i_order'] ]]</td>
+                    <td>[[=imt['i_type'] ]]</td>
+                    <td>[[=imt['i_script'] ]]</td>
+                    <td>[[=imt['i_filter'] ]]</td>
+                    [[if type == 'mt':]]
+                      <td><a href="[[=URL('imt_remove', imt['i_order']) ]]" onclick='window.location'=_href><button type="button" class="btn btn-xs"><i class="fa fa-trash-o text-red"></i>Delete</button></a></td>
+                    [[else:]]
+                    <td><a href="[[=URL('imo_remove', imt['i_order']) ]]" onclick='window.location'=_href><button type="button" class="btn btn-xs"><i class="fa fa-trash-o text-red"></i>Delete</button></a></td>
+                    [[pass]]
+                    </tr>
+                [[pass]]
+            </tbody>
+        </table>
+    </div>
+ </div>
+    

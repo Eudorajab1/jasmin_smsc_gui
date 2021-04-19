@@ -1,0 +1,33 @@
+[[extend 'layout.html']]
+<script>
+    $(document).ready(function() { 
+       jQuery('#smppserver_stats').DataTable()
+    });
+</script>
+<div class="box" >
+    <div class="columns">
+        <div class="column is-4">
+            <a href="[[=URL('stats')]]"><button type="button" class="btn btn-outline-info "><i class="fa fa-arrow-circle-left">  Back</i></button></a>
+        </div>
+        <div class="column">
+            <div class="title">SMPP Server Stats</div>
+        </div>
+    </div>
+    
+        <table id="smppserver_stats" class="display compact" style="width:100%">
+        <thead>
+            <tr>
+            <th>Item</th><th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+        [[for item in items:]]
+        <tr>
+            <td>[[=item[0] ]]</td>
+            <td>[[=item[1] ]]</td>
+        </tr>
+        [[pass]]
+        </tbody>
+    </table>
+    </div>
+    

@@ -1,0 +1,63 @@
+[[extend 'layout.html']]
+
+<div class="box" id="index">
+  <div class="columns">
+    <div class="column is-4">
+      <a class="button is-large" style="width:100%" href="[[=URL('s_users')]]">
+        <span class="icon is-large">
+          <i class="fa fa-user has-text-primary" ></i>
+        </span>
+        <span>User Actions &nbsp</span>
+        <span class="tag is-info is-rounded is-medium">
+          [[=tot_users]] 
+        </span>
+      </a>
+    </div>
+    <div class="column is-4">
+      <a class="button is-large" style="width:100%" href="[[=URL('flush_mtroutes')]]">
+        <span class="icon is-large">
+          <i class="fa fa-sign-out-alt has-text-primary" ></i>
+        </span>
+        <span>Flush MT Routes &nbsp</span>
+        <span class="tag is-info is-rounded is-medium">
+          [[=tot_mtroutes]] 
+        </span>
+      </a>
+    </div>
+    <div class="column is-4">
+      <a class="button is-large" style="width:100%" href="[[=URL('flush_moroutes')]]">
+        <span class="icon is-large">
+          <i class="fa fa-sign-in-alt has-text-primary" ></i>
+        </span>
+        <span>Flush MO Routes &nbsp</span>
+           <span class="tag is-info is-rounded is-medium">
+          [[=tot_moroutes]] 
+        </span>
+      </a>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column is-4">
+      <a class="button is-large" style="width:100%" href="[[=URL('flush_imts')]]">
+        <span class="icon is-large">
+          <i class="fa fa-user-shield has-text-primary" ></i>
+        </span>
+        <span>Flush MT Interceptors &nbsp</span>
+           <span class="tag is-info is-rounded is-medium">
+          [[=tot_imts]] 
+        </span>
+      </a>
+    </div>
+    <div class="column is-4">
+      <a class="button is-large" style="width:100%" href="[[=URL('flush_imos')]]">
+        <span class="icon is-large">
+          <i class="fa fa-user-shield has-text-primary" ></i>
+        </span>
+        <span>Flush MO Interceptors &nbsp</span>
+           <span class="tag is-info is-rounded is-medium">
+          [[=tot_imos]] 
+        </span>
+      </a>
+    </div>
+  </div>
+</div>

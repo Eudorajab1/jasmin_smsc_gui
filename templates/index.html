@@ -1,7 +1,128 @@
 [[extend 'layout.html']]
 
-<div class="section">
-  <div class="vars">
-      [[=message]]
+<div class="box" id="index">
+  <div class="columns">
+    <div class="column is-3">
+      <a class="button is-large" style="width:100%" href="[[=URL('stats')]]">
+        <span class="icon is-large">
+          <i class="fa fa-chart-line has-text-primary" ></i>
+        </span>
+        <span>Statistics</span>
+      </a>
+    </div>
+    <div class="column is-3">
+      <a class="button is-large" style="width:100%" href="[[=URL('manage_groups')]]">
+        <span class="icon is-large">
+          <i class="fa fa-users has-text-primary" ></i>
+        </span>
+        <span>Routing Groups &nbsp</span> 
+        <span class="tag is-info is-rounded is-medium">
+          [[=tot_grps]] 
+        </span>
+      </a>
+    </div>
+    <div class="column is-3">
+      <a class="button is-large" style="width:100%" href="[[=URL('manage_users')]]">
+        <span class="icon is-large">
+          <i class="fa fa-user has-text-primary" ></i>
+        </span>
+        <span>Users &nbsp</span>
+        <span class="tag is-info is-rounded is-medium">
+          [[=tot_users]] 
+        </span>
+      </a>
+    </div>
+    <div class="column is-3">
+      <a class="button is-large" style="width:100%" href="[[=URL('manage_filters')]]">
+        <span class="icon is-large">
+          <i class="fa fa-filter has-text-primary" ></i>
+        </span>
+        <span>Filters &nbsp</span>
+        <span class="tag is-info is-rounded is-medium">
+          [[=tot_filters]] 
+        </span>
+      </a>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column is-3">
+      <a class="button is-large" style="width:100%" href="[[=URL('manage_smpp_connectors')]]">
+        <span class="icon is-large">
+          <i class="fa fa-ethernet has-text-primary" ></i>
+        </span>
+        <span>SMPP Connectors &nbsp</span>
+        <span class="tag is-info is-rounded is-medium">
+          [[=tot_smppcons]] 
+        </span>
+      </a>
+    </div>
+    <div class="column is-3">
+      <a class="button is-large" style="width:100%" href="[[=URL('manage_http_connectors')]]">
+        <span class="icon is-large">
+          <i class="fa fa-code has-text-primary" ></i>
+        </span>
+        <span>HTTP Connectors &nbsp</span>
+        <span class="tag is-info is-rounded is-medium">
+          [[=tot_httpcons]] 
+        </span>
+      </a>
+    </div>
+    <div class="column is-3">
+      <a class="button is-large" style="width:100%" href="[[=URL('manage_mt_routes')]]">
+        <span class="icon is-large">
+          <i class="fa fa-sign-out-alt has-text-primary" ></i>
+        </span>
+        <span>MT Routes &nbsp</span>
+        <span class="tag is-info is-rounded is-medium">
+          [[=tot_mtroutes]] 
+        </span>
+      </a>
+    </div>
+    <div class="column is-3">
+      <a class="button is-large" style="width:100%" href="[[=URL('manage_mo_routes')]]">
+        <span class="icon is-large">
+          <i class="fa fa-sign-in-alt has-text-primary" ></i>
+        </span>
+        <span>MO Routes &nbsp</span>
+           <span class="tag is-info is-rounded is-medium">
+          [[=tot_moroutes]] 
+        </span>
+      </a>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column is-3">
+      <a class="button is-large" style="width:100%" href="[[=URL('manage_imts')]]">
+        <span class="icon is-large">
+          <i class="fa fa-user-shield has-text-primary" ></i>
+        </span>
+        <span>MT Interceptors &nbsp</span>
+           <span class="tag is-info is-rounded is-medium">
+          [[=tot_imts]] 
+        </span>
+     
+      </a>
+    </div>
+    <div class="column is-3">
+      <a class="button is-large" style="width:100%" href="[[=URL('manage_imos')]]">
+        <span class="icon is-large">
+          <i class="fa fa-user-shield has-text-primary" ></i>
+        </span>
+        <span>MO Interceptors &nbsp</span>
+           <span class="tag is-info is-rounded is-medium">
+          [[=tot_imos]] 
+        </span>
+     
+      </a>
+    </div>
+    <div class="column is-3">
+      <a class="button is-large" style="width:100%" href="[[=URL('super_admin')]]">
+        <span class="icon is-large">
+          <i class="fa fa-cog has-text-primary" ></i>
+        </span>
+        <span>Super Admin</span>
+      </a>
+    </div>
+    
   </div>
 </div>

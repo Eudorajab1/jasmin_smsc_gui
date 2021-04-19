@@ -1,0 +1,40 @@
+[[extend 'layout.html']]
+<script>
+$(document).ready(function() { 
+    jQuery('#user_stats').DataTable({
+     "scrollY": true,
+     "scrollX": true
+    });
+ });
+ </script>
+ <div class="box" >
+     <div class="columns">
+         <div class="column is-4">
+             <a href="[[=URL('stats')]]"><button type="button" class="btn btn-outline-info "><i class="fa fa-arrow-circle-left">  Back</i></button></a>
+         </div>
+         <div class="column">
+             <div class="title">User Stats</div>
+         </div>
+     </div>
+     <table id="user_stats" class="display compact" style="width:100%" >
+             <thead>
+              <tr>
+                <th>UserID</th><th>SMPP Binds</th><th>SMPP L.A</th><th>HTTP Requests</th><th>HTTP L.A</th><th>Options</th>
+              </tr>
+            </thead>
+            <tbody>
+                [[for usr in users:]]
+                <tr>
+                    <td>[[=usr['uid'] ]]</td>
+                    <td>[[=usr['smpp_bc'] ]]</td>
+                    <td>[[=usr['smpp_la'] ]]</td>
+                    <td>[[=usr['http_rc'] ]]</td>
+                    <td>[[=usr['http_la'] ]]</td>
+                    <td><a href="[[=URL('users_stats', usr['uid']) ]]" ><button type="button" class="btn btn-outline-info btn-sm"><i class="fa fa-chart-line text-success"></i> Stats</button></a>
+                    </td>
+                </tr>
+                [[pass]]
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+[[extend 'layout.html']]
+
+<script>
+  jQuery(document).ready(function(){
+    jQuery('#group_list').DataTable({
+    });
+  });
+</script>
+<div class="columns">
+  <div class="column">
+    <div class="box" id="form">
+      <div class="subtitle">Add a new Group</div>
+      [[=form]]
+    </div>
+  </div>
+  <div class="column">    
+    <div class="box">
+      <table id="group_list" class="display compaact" style="width:100%">
+      <thead>
+        <tr>
+          <th>Group</th><th>Status</th><th>Actions</th>
+        </tr>
+      </thead>
+        <tbody>
+          [[for con in groups:]]
+          <tr>
+            [[grp = con['gid'][0] ]]    
+            [[if grp[0] == '!':]]
+              [[group_name = con['gid'][1:] ]]
+                <td>[[=group_name]]</td>
+                <td>
+                  <span class="icon is-success">
+                    <i class="fas fa-stop-circle" style="color:red"></i>
+                  </span>
+                  <span>
+                    Disabled
+                  </span>
+                </td>
+            [[else:]]
+              [[group_name = con['gid'] ]]
+              <td>[[=group_name]]</td>
+                <td>
+                  <span class="icon is-success">
+                    <i class="fas fa-check-square" style="color:green"></i>
+                  </span>
+                  <span>
+                    Enabled
+                  </span>
+               </td>
+              [[pass]]
+   
+                <td>
+                  <a href="[[=URL('manage_groups', con['gid'], 'disable')]]" onclick='window.location=_href'>
+                    <button type="button" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-toggle-on text-danger"></i> Disable</button>
+                  </a>
+                  <a href="[[=URL('manage_groups', con['gid'], 'enable')]]" onclick='window.location=_htref'>
+                    <button type="button" class="btn btn-outline-primary btn-sm">
+                      <i class="fas fa-toggle-on text-success"></i> Enable</button>
+                  </a>    
+                  <a href="[[=URL('manage_groups', con['gid'], 'remove')]]" onclick='window.location=_href'>
+                    <button type="button" class="btn btn-outline-primary btn-sm">
+                      <i class="fas fa-trash text-danger"></i> Delete</button>
+                  </a>
+                </td>
+              </tr>
+            [[pass]]
+         </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>    

@@ -25,6 +25,12 @@ STATIC_FOLDER = required_folder(APP_FOLDER, "static")
 # location where to store uploaded files:
 UPLOAD_FOLDER = required_folder(APP_FOLDER, "uploads")
 
+# jasmin settings:
+JASMIN_HOST = '0.0.0.0'
+JASMIN_PORT = 8990
+JASMIN_USER = 'jcliadmin'
+JASMIN_PWD = 'jclipwd'
+
 # send email on regstration
 VERIFY_EMAIL = True
 
