@@ -125,6 +125,21 @@ py4web run apps
 ```
 $ py4web run apps
 ```
+Once py4web is running you can access a specific app at the following urls from your browser:
+```
+http://localhost:8000
+http://localhost:8000/_dashboard
+http://localhost:8000/{yourappname}/index
+```
+In order to stop py4web, you need to hit Control-C on the window where you run it.
+Please refer to the user documentation if you need to change the configs or wish to use different ports etc.
+
+Now that we have both Jasmin and Py4web configured and running we need to install the Jasmin SMS GUI. This is a Py4Web app so should go in the py4web/apps folder.
+
+```
+cd apps
+
+
 E-xplain how to run the automated tests for this system
 
 ### Break down into end to end tests
