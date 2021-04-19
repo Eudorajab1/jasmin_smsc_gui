@@ -88,6 +88,16 @@ Start the Jasmin container
 ```
 $ docker-compose up
 ```
+Check that Jasmin is up and running
+```
+$ docker ps
+CONTAINER ID   IMAGE                 COMMAND                  CREATED      STATUS      PORTS                                                                    NAMES
+f4cc24abd695   jookies/jasmin:0.10   "/docker-entrypoint.…"   3 days ago   Up 3 days   0.0.0.0:1401->1401/tcp, 0.0.0.0:2775->2775/tcp, 0.0.0.0:8990->8990/tcp   jasmin
+794d7b78b76a   redis:alpine          "docker-entrypoint.s…"   3 days ago   Up 3 days   6379/tcp                                                                 jasmin_redis_1
+4febaf435594   rabbitmq:alpine       "docker-entrypoint.s…"   3 days ago   Up 3 days   4369/tcp, 5671-5672/tcp, 15691-15692/tcp, 25672/tcp                      jasmin_rabbit-mq_1
+5c8b43d5cfc1   eagafonov/smppsim     "/bin/sh -c /opt/loc…"   3 days ago   Up 3 days   0.0.0.0:3785->2775/tcp                                                   smppsim
+```
+Please refer to the Jasmin manual for troubleshooting if needed 
 
 
 
