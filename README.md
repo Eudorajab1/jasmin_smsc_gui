@@ -1,1 +1,1 @@
-# Jasmin SMSC GUI
+Jasmin SMS GUI
