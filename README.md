@@ -151,12 +151,13 @@ Once you have cloned the app you need open the file apps/jasmin_smsc_gui/setting
 * JASMIN_PORT
 * JASMIN_USER
 * JASMIN_PWD
+
 to reflect your setup.
 
 Once saved you can restart Py4Web and navigate to http://localhost:8000/jasmin_smsc_gui
 
 ## Initialise the database
-If you have an existing instance of Jasmin, once you have connected you can run the populate database function from the superadmin menu which will import all current groups, users, connectors, filters etc from you instance of Jasmin. 
+If you have an existing instance of Jasmin, once you have connected you can run the populate database function from the superadmin option which will import all current groups, users, connectors, filters etc from your working instance of Jasmin. 
 
 ## Authors
 
@@ -164,7 +165,7 @@ If you have an existing instance of Jasmin, once you have connected you can run 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
 
 ## Acknowledgments
 
