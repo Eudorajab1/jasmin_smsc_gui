@@ -28,11 +28,68 @@ docker-compose version 1.28.5, build c4eb3a1f
 ```
 If docker is not installed you will need to install it before proceeding
 
-And repeat
+Create a directory to store your docker-compose file
 
 ```
-until finished
+$ mkdir /opt/scripts/jasmin
+$ cd /opt/scripts/jasmin
 ```
+
+Create a docker compose file in the directory usind your favourite editor
+
+```
+$ vi docker-compose.yml
+```
+Paste the following into the docker-compose.yml
+
+```
+version: "3"
+
+services:
+  smppsim:
+    image: eagafonov/smppsim
+    container_name: smppsim
+    ports:
+      - 3785:2775
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+
+  rabbit-mq:
+    image: rabbitmq:alpine
+    restart: unless-stopped
+
+  jasmin:
+    image: jookies/jasmin:0.10
+    restart: unless-stopped
+    container_name: jasmin
+    volumes:
+      - /var/log/jasmin:/var/log/jasmin
+      #- /etc/jasmin:/etc/jasmin
+      - /etc/jasmin/store:/etc/jasmin/store
+
+    ports:
+      - 2775:2775
+      - 8990:8990
+      - 1401:1401
+    depends_on:
+      - redis
+      - rabbit-mq
+    environment:
+      REDIS_CLIENT_HOST: redis
+      AMQP_BROKER_HOST: rabbit-mq
+      SMPPSIM: smppsim
+```
+
+This includes an smpp simulator in order to test connectivity etc.
+Save and close.
+
+Start the Jasmin container
+```
+$ docker-compose up
+```
+
+
 
 End with an example of getting some data out of the system or using it for a little demo
 
