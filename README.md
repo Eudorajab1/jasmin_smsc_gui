@@ -14,8 +14,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 
-Depending on your requirements and OS installation will vary. 
+Depending on your requirements and OS installation will vary.
+
 Full documentation for the installation and usage for Jasmin SMS Gateway can be found at https://docs.jasminsms.com/en/latest/index.html 
+
 Full documentation for the installation and usage for Py4Web can be found at https://py4web.com/_documentation/static/en/index.html
 
 Example:
