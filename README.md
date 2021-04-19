@@ -158,9 +158,9 @@ git clone https://github.com/Eudorajab1/jasmin_smsc_gui.git .
 Once you have cloned the app you need open the file apps/jasmin_smsc_gui/settings.py in your favourite text edior and change the following:
 
 * JASMIN_HOST host as per telnet command
-* JASMIN_PORT port as per telnet command>
-* JASMIN_USER <as per jasmin config default is "jcliuser">
-* JASMIN_PWD  <as per jasmin config default is "jclipwd">
+* JASMIN_PORT port as per telnet command
+* JASMIN_USER as per jasmin config default is "jcliuser"
+* JASMIN_PWD  as per jasmin config default is "jclipwd"
 
 to reflect your setup.
 
