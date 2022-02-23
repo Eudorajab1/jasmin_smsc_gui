@@ -1,13 +1,17 @@
 [[extend 'layout.html']]
 <script>
-    $(document).ready(function() {
-      $('.select').select2({
+  $(document).ready(function() {
+    $('div.select').removeClass('select');  
+    $('.select').select2({
       placeholder: 'Select an option',
       width:'50%',
+      id: "value attribute" || "option text",
+      text: "label attribute" || "option text",
+      element: HTMLOptionElement  
     });
     $('#mt_interceptors').DataTable();
-        [[if form and not form.errors:]]jQuery('#form').hide();[[pass]]
-    });
+      [[if form and not form.errors:]]jQuery('#form').hide();[[pass]]
+  });
 </script>
  
 <div id="show_form">
