@@ -81,14 +81,14 @@ def manage_filters():
                 Field('f_value', 'string', length = 50, label='Filter Value', comment='Values must correspond to filter type'),
                ], dbio=False, formstyle=FormStyleBulma, deletable=False)
     if form.accepted:
-        response=jasmin.filters(['create', form.vars.fid, form.vars.filter_type, form.vars.f_value])
+        response=jasmin.filters(['create', form.vars['fid'], form.vars['filter_type'], form.vars['f_value']])
         if not response:
             ret = db.mt_filter.update_or_insert(db.mt_filter.fid == form.vars['fid'],
                                                 fid = form.vars['fid'],    
                                                 filter_type = form.vars['filter_type'],
                                                 f_value = form.vars['f_value'])
             
-            flash.set("Added a new filter %s" % form.vars.fid)
+            flash.set("Added a new filter %s" % form.vars['fid'])
         else:
             flash.set('Problem adding filter %s' % response)
         redirect(URL('manage_filters'))

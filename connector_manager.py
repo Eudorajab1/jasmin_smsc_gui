@@ -46,21 +46,21 @@ def edit_smpp_connector(cid):
     back=''
     if cc: # we already have a record 
         print('Inside have one')
-        form = Form(db.connector, cc, deletable=False)
+        form = Form(db.connector, cc, deletable=False, formstyle=FormStyleBulma)
     else:
         print('inside new one')
-        form = Form(db.connector, deletable=False)
+        form = Form(db.connector, deletable=False, formstyle=FormStyleBulma)
     if form.accepted:
         ret = jasmin.connector(['update',con,\
-                               form.vars.c_ripf,form.vars.c_con_fail_delay,form.vars.c_dlr_expiry,\
-                               form.vars.c_coding,form.vars.c_logrotate,form.vars.c_submit_throughput,\
-                               form.vars.c_elink_interval,form.vars.c_bind_to,form.vars.c_port,form.vars.c_con_fail_retry,\
-                               form.vars.c_password,form.vars.c_src_addr,form.vars.c_bind_npi,form.vars.c_addr_range,\
-                               form.vars.c_dst_ton,form.vars.c_res_to,form.vars.c_def_msg_id,form.vars.c_priority,\
-                               form.vars.c_con_loss_retry,form.vars.c_username,form.vars.c_dst_npi,form.vars.c_validity,\
-                               form.vars.c_requeue_delay,form.vars.c_host,form.vars.c_src_npi,form.vars.c_trx_to,form.vars.c_logfile,\
-                               form.vars.c_ssl,form.vars.c_loglevel,form.vars.c_bind,form.vars.c_proto_id,form.vars.c_dlr_msgid,\
-                               form.vars.c_con_loss_delay,form.vars.c_bind_ton,form.vars.c_pdu_red_to,form.vars.c_src_ton,])
+                               form.vars['c_ripf'],form.vars['c_con_fail_delay'],form.vars['c_dlr_expiry'],\
+                               form.vars['c_coding'],form.vars['c_logrotate'],form.vars['c_submit_throughput'],\
+                               form.vars['c_elink_interval'],form.vars['c_bind_to'],form.vars['c_port'],form.vars['c_con_fail_retry'],\
+                               form.vars['c_password'],form.vars['c_src_addr'],form.vars['c_bind_npi'],form.vars['c_addr_range'],\
+                               form.vars['c_dst_ton'],form.vars['c_res_to'],form.vars['c_def_msg_id'],form.vars['c_priority'],\
+                               form.vars['c_con_loss_retry'],form.vars['c_username'],form.vars['c_dst_npi'],form.vars['c_validity'],\
+                               form.vars['c_requeue_delay'],form.vars['c_host'],form.vars['c_src_npi'],form.vars['c_trx_to'],form.vars['c_logfile'],\
+                               form.vars['c_ssl'],form.vars['c_loglevel'],form.vars['c_bind'],form.vars['c_proto_id'],form.vars['c_dlr_msgid'],\
+                               form.vars['c_con_loss_delay'],form.vars['c_bind_ton'],form.vars['c_pdu_red_to'],form.vars['c_src_ton'],])
         if not ret:
             flash.set("Successfully updated connector %s" % con)
             redirect(URL('manage_smpp_connectors'))
@@ -146,8 +146,9 @@ def manage_smpp_connectors():
     
     form=Form(db.connector, dbio=False, formstyle=FormStyleBulma)
     if form.accepted:
-        name = form.vars.name
-        res = jasmin.connector(['create', name, form.vars.c_username, form.vars.c_password, form.vars.c_host, form.vars.c_port, form.vars.c_submit_throughput])
+        name = form.vars['name']
+        res = jasmin.connector(['create', name, form.vars['c_username'], form.vars['c_password'],\
+                                 form.vars['c_host'], form.vars['c_port'], form.vars['c_submit_throughput']])
         if not res:
             form.vars['c_logfile'] = '/var/log/jasmin/default-%s.log' % name
             id = db.connector.insert(**db.connector._filter_fields(form.vars))
@@ -200,8 +201,8 @@ def manage_http_connectors():
         Field('hcon_url',label='Base URL', comment='URL for MO messages e.g http://10.10.20.125/receive-sms/mo.php'), 
               ], dbio=False, formstyle=FormStyleBulma, deletable=False)
     if form.accepted:
-        name = form.vars.name
-        resp = jasmin.http_cons(['create', form.vars.hcon_cid,form.vars.hcon_method, form.vars.hcon_url])
+        name = form.vars['hcon_cid']
+        resp = jasmin.http_cons(['create', form.vars['hcon_cid'],form.vars['hcon_method'], form.vars['hcon_url']])
         if resp: # we have an error
             flash.set(resp)
         else:     

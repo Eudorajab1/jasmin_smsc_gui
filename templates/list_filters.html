@@ -46,11 +46,13 @@
 </div>
 <script>
   $(document).ready(function() {
+    $('div.select').removeClass('select');  
     $('.select').select2({
-    placeholder: 'Select an option',
-    width:'50%'  
+      placeholder: 'Select an option',
+      width:'50%',
     });
     $('#list_filters').DataTable();
-      [[if form and not form.errors:]]jQuery('#form').hide();[[pass]]
   });
+  [[if form and not form.errors:]]jQuery('#form').hide();[[pass]]
+
 </script>

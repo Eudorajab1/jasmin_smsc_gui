@@ -60,10 +60,7 @@
     </div>
     <script>
       $(document).ready(function() {
-        $('.select').select2({
-        placeholder: 'Select an option',
-        width:'50%'
-      });
+        
       $('#mt_routes').DataTable()
       [[if form and not form.errors:]]jQuery('#form').hide();[[pass]]
       });

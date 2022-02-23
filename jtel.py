@@ -589,7 +589,7 @@ class Jptelnet(object):
         
         if self.tn is not None and self.tn.get_socket():
             self.tn.close()
-        return reponse
+        return response
     
     def list_it(self, list_type=None):  
         result = None

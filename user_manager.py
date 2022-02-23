@@ -88,9 +88,9 @@ def manage_groups(group=None, action=None):
 
     form=Form(db.j_group, dbio=False, formstyle=FormStyleBulma)
     if form.accepted:
-        group=jasmin.users(['create_group', form.vars.name])
+        group=jasmin.users(['create_group', form.vars['name']])
         if group:
-            db.j_group.insert(name=form.vars.name)
+            db.j_group.insert(**form.vars)
     groups=list_groups()
     return dict(form=form, groups=groups)
 
@@ -205,12 +205,13 @@ def manage_users(user=None, action=None):
             flash.set(ret)
         else:
             flash.set('Removed user %s ' % user)
-    form = Form([
+    form = Form(db.j_user,dbio=False, formstyle=FormStyleBulma)
+    '''[
         Field('username', 'string', length=10, comment="Jasmin User Name for HTTP and SMPP connecting. Must not include any spaces and can not be longer than 10 characters"),
         Field('password', 'string', length=10, comment='Jasmin Password for HTTP and SMPP connecting. Must not include any spaces and can not be longer than 10 characters'),
         Field('j_uid','string',label='Jasmin UID',length=12, comment='Jasmin UID cannot be longer than 12 characters and reccoment all in UPPER case. No spaces allowed. Suggest USER_1 etc.'),
         Field('j_group','reference j_group',label = 'Jasim GID', comment='Select a Group', requires=IS_IN_DB(db,'j_group.id','j_group.name'))],
-        dbio=False, formstyle=FormStyleBulma)
+    ]'''    
     if form.accepted:
         j_gid=db.j_group[form.vars['j_group']].name
         ret=jasmin.users(['create_user',form.vars['j_uid'],form.vars['username'], form.vars['password'], j_gid])

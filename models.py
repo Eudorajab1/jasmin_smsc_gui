@@ -45,7 +45,7 @@ db.define_table('j_user',
                 Field('password', 'string', length=10, comment='Jasmin Password for HTTP and SMPP connecting. Must not include any spaces and can not be longer than 10 characters'),
                 Field('j_uid','string',label='Jasmin UID',length=12, comment='Jasmin UID cannot be longer than 12 characters and reccoment all in UPPER case. No spaces allowed. Suggest USER_1 etc.'),
                 Field('j_group','reference j_group',label = 'Jasim GID', comment='Select a Group', requires=IS_IN_DB(db,'j_group.id','j_group.name')),
-               format='%(name)s')
+               format='%(username)s')
 
 db.define_table('j_user_cred',
                 Field('juser', 'string',label='Jasmin UID', length = 10),

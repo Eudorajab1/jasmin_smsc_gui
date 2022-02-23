@@ -1,55 +1,54 @@
 [[extend 'layout.html']]
-    <div id="show_form">
-        <a onclick="jQuery('#form').slideToggle();jQuery('#connectors').slideToggle();"> 
-          <button type="button" class="btn btn-outline-info btn-sm"><i class="fa fa-list text-info"></i>
-          Toggle List/Add
-          </button>
-        </a>
-        <div class="columns is-centered">
-        <div class="column is-6">
-          <div id="form" class="box">
-            [[=form]]
-          </div>
-        </div>
+<div id="show_form">
+    <a onclick="jQuery('#form').slideToggle();jQuery('#connectors').slideToggle();"> 
+      <button type="button" class="btn btn-outline-info btn-sm"><i class="fa fa-list text-info"></i>
+      Toggle List/Add
+      </button>
+    </a>
+    <div class="columns is-centered">
+    <div class="column is-6">
+      <div id="form" class="box">
+        [[=form]]
       </div>
     </div>
-    <div id="connectors" class="box">
-        <div class="box-header">
-            <div class="subtitle">HTTP Connector List </div>
-        </div>
-        <div class="card-body">
-            <table id="list_http_cons" class="display compact" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>CID</th><th>Type</th><th>Method</th><th>Base URL</th><th>Options</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    [[for con in cons:]]
-                        <tr>
-                            <td>[[=con['cid'] ]]</td>
-                            <td>[[=con['c_type'] ]]</td>
-                            <td>[[=con['method'] ]]</td>
-                            <td>[[=con['baseurl'] ]]</td>
-                            <td><a href="[[=URL('delete_http_con', con['cid']) ]]">
-                                <button type="button" class="btn btn-outline-primary btn-sm">
-                                    <i class="fa fa-trash text-danger"></i> Delete</button></a></td>
-        
-                        </tr>
-                    [[pass]]
-                </tbody>
-            </table>
-        </div>
+  </div>
+</div>
+<div id="connectors" class="box">
+    <div class="box-header">
+        <div class="subtitle">HTTP Connector List </div>
     </div>
-    <script>
-        $(document).ready(function() {
-          $('.select').select2({
-          placeholder: 'Select an option',
-          width:'50%',
-          
-        });
-        $('#list_http_cons').DataTable();
-          [[if form and not form.errors:]]jQuery('#form').hide();[[pass]]
+    <div class="card-body">
+        <table id="list_http_cons" class="display compact" style="width:100%">
+            <thead>
+                <tr>
+                    <th>CID</th><th>Type</th><th>Method</th><th>Base URL</th><th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                [[for con in cons:]]
+                    <tr>
+                        <td>[[=con['cid'] ]]</td>
+                        <td>[[=con['c_type'] ]]</td>
+                        <td>[[=con['method'] ]]</td>
+                        <td>[[=con['baseurl'] ]]</td>
+                        <td><a href="[[=URL('delete_http_con', con['cid']) ]]">
+                            <button type="button" class="btn btn-outline-primary btn-sm">
+                                <i class="fa fa-trash text-danger"></i> Delete</button></a></td>
     
-        });
-        </script>
+                    </tr>
+                [[pass]]
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+  $(document).ready(function() {
+  $('div.select').removeClass('select');  
+  $('.select').select2({
+    placeholder: 'Select an option',
+    width:'50%',
+  });
+  $('#list_http_cons').DataTable();
+    [[if form and not form.errors:]]jQuery('#form').hide();[[pass]]
+  });
+</script>

@@ -49,13 +49,13 @@ def mt_static(route_type=None):
         dbio=False,
         formstyle=FormStyleBulma)
     if form.accepted:
-        f = form.vars.connector
+        f = form.vars['connector']
         form.vars['mt_connectors'] = [f]
         form.vars['mt_type'] = route_type
-        print('Connector ', form.vars.mt_connectors)
+        print('Connector ', form.vars['mt_connectors'])
         con = db.connector[f].name
         cons = 'smppc('+con+')'
-        order = form.vars.mt_order
+        order = form.vars['mt_order']
         ff=''
         for f in form.vars['mt_filters']:
             ff += db.mt_filter[f].fid
@@ -95,7 +95,7 @@ def mt_default(route_type=None):
         con = db.connector[form.vars['mt_connectors']].name
         cons = 'smppc('+con+')'
         order = '0'
-        rate=form.vars.mt_rate
+        rate=form.vars['mt_rate']
         connectors = [form.vars['mt_connectors']]
         print('Connectors', connectors)
         resp= jasmin.mtrouter(['DefaultRoute', cons, rate])
@@ -133,19 +133,19 @@ def mt_random(route_type):
         Field('mt_rate','string',length = 10, label='Rate', comment='Decimal rate value for the connector. All messages going over this connector will be charged at the rate specified'),
         ],dbio=False, formstyle=FormStyleBulma)
         if form.accepted:
-            if len(form.vars.mt_connectors) > 1:
-                order = form.vars.order
+            if len(form.vars['mt_connectors']) > 1:
+                order = form.vars['order']
                 ff=''
-                for f in form.vars.mt_filters:
+                for f in form.vars['mt_filters']:
                         ff += db.mt_filter[f].fid
                         ff+=';'
                 filters = ff
                 cc=''
-                for f in form.vars.mt_connectors:
+                for f in form.vars['mt_connectors']:
                     cc += 'smppc('+ db.connector[f].name+');'
                 cons = cc
-                order = form.vars.mt_order
-                rate = form.vars.mt_rate
+                order = form.vars['mt_order']
+                rate = form.vars['mt_rate']
                 form.vars['mt_type'] = t
                 have_one = db(db.mtroute.mt_order == form.vars['mt_order']).select().first()
                 if not have_one:    
@@ -184,18 +184,18 @@ def mt_failover(route_type):
     if form.accepted:
         if len(form.vars['mt_connectors']) > 1:
             form.vars['mt_type'] = t
-            order = form.vars.order
+            order = form.vars['order']
             ff=''
-            for f in form.vars.mt_filters:
+            for f in form.vars['mt_filters']:
                     ff += db.mt_filter[f].fid
                     ff+=';'
             filters = ff
             cc=''
-            for f in form.vars.mt_connectors:
+            for f in form.vars['mt_connectors']:
                 cc += 'smppc('+db.connector[f].name+');'
             cons = cc
-            order = form.vars.mt_order
-            rate = form.vars.mt_rate
+            order = form.vars['mt_order']
+            rate = form.vars['mt_rate']
             have_one = db(db.mtroute.mt_order == form.vars['mt_order']).select().first()
             if not have_one:    
                 resp= jasmin.mtrouter(['FailoverMTRoute',order, cons[:-1], filters[:-1],rate])
@@ -225,13 +225,13 @@ def manage_mt_routes():
         formstyle=FormStyleBulma)
     
     if form.accepted:
-        if form.vars.r_tpe =='DefaultRoute':
+        if form.vars['r_tpe'] =='DefaultRoute':
             redirect(URL('mt_default', 'DefaultRoute'))
             flash.set('Add a new Default Route')
-        elif form.vars.r_tpe =='StaticMTRoute':
+        elif form.vars['r_tpe'] =='StaticMTRoute':
             redirect(URL('mt_static', 'StaticMtRoute'))
             flash.set=('Static MT Route')
-        elif form.vars.r_tpe =='RandomRoundrobinMTRoute':
+        elif form.vars['r_tpe'] =='RandomRoundrobinMTRoute':
             redirect(URL('mt_random', 'RandomRoundrobinMTRoute'))
             flash.set('Random Round Robin Route')
         else:
@@ -390,17 +390,17 @@ def mo_create(route_type):
             if route_exists(0):
                 flash.set('Route with order 0 already exists')
                 redirect(URL('manage_mo_routes'))
-            if not form.vars.mo_connectors and not form.vars.mo_http_cons:
+            if not form.vars['mo_connectors'] and not form.vars['mo_http_cons']:
                 flash.set('please select either HTTP or SMPP connector')
                 redirect(URL('mo_create', 'DefaultRoute'))
             if form.vars['mo_connectors'] and form.vars['mo_http_cons']:
                 flash.set('please select either HTTP or SMPP connector not both')
                 redirect(URL('mo_create', 'DefaultRoute'))
-            if form.vars.mo_connectors:
-                con = db.connector[form.vars.mo_connectors].name
+            if form.vars['mo_connectors']:
+                con = db.connector[form.vars['mo_connectors']].name
                 cons='smpps('+con+')'
             else:
-                con = db.http_cons[form.vars.mo_http_cons].hcon_cid
+                con = db.http_cons[form.vars['mo_http_cons']].hcon_cid
                 cons='http('+con+')'
             form.vars['mo_type'] = route_type
             form.vars['mo_order'] = '0'
@@ -408,10 +408,10 @@ def mo_create(route_type):
             if not resp:
                 id = db.moroute.insert(**db.moroute._filter_fields(form.vars))
                 if id:
-                    flash.set('New Default MO route added with order %s' % form.vars.mo_order)
+                    flash.set('New Default MO route added with order %s' % form.vars['mo_order'])
                     redirect(URL('manage_mo_routes'))
                 else:
-                    flash.set('New Default MO route with order %s NOT ADDED TO DB' % form.vars.mo_order)
+                    flash.set('New Default MO route with order %s NOT ADDED TO DB' % form.vars['mo_order'])
             else:
                 flash.set('ERROR: %s ' % resp)
         elif form.errors:
@@ -427,20 +427,20 @@ def mo_create(route_type):
             if route_exists(form.vars['mo_order']):
                 flash.set('MO Route with order %s already exists' % form.vars['mo_order'])
                 redirect(URL('manage_mo_routes'))
-            if not form.vars.mo_connectors and not form.vars.mo_http_cons:
+            if not form.vars['mo_connectors'] and not form.vars['mo_http_cons']:
                 flash.set('please select either HTTP or SMPP connector')
                 redirect(URL('mo_create', 'StaticMORoute'))
-            if form.vars.mo_connectors and form.vars.mo_http_cons:
+            if form.vars['mo_connectors'] and form.vars['mo_http_cons']:
                 flash.set('Please select either HTTP or SMPP connector not both')
                 redirect(URL('mo_create', 'StaticMORoute'))
             if form.vars['mo_connectors']:
-                con = db.connector[form.vars.mo_connectors].name
+                con = db.connector[form.vars['mo_connectors']].name
                 cons='smpps('+con+')'
             else:
-                con = db.http_cons[form.vars.mo_http_cons].hcon_cid
+                con = db.http_cons[form.vars['mo_http_cons']].hcon_cid
                 cons='http('+con+')'
             ff=''
-            for f in form.vars.mo_filters:
+            for f in form.vars['mo_filters']:
                 ff += db.mt_filter[f].fid
                 ff+=';'
             filters = ff
@@ -451,10 +451,10 @@ def mo_create(route_type):
             if not resp:
                 id = db.moroute.insert(**db.moroute._filter_fields(form.vars))
                 if id:
-                    flash.set('New Static MO route added with order %s' % form.vars.mo_order)
+                    flash.set('New Static MO route added with order %s' % form.vars['mo_order'])
                     redirect(URL('manage_mo_routes'))
                 else:
-                    flash.set('New Static MO route with order %s NOT ADDED TO DB' % form.vars.mo_order)
+                    flash.set('New Static MO route with order %s NOT ADDED TO DB' % form.vars['mo_order'])
             else:
                 flash.set('ERROR: %s ' % resp)
         elif form.errors:
@@ -472,22 +472,22 @@ def mo_create(route_type):
             if route_exists(form.vars['mo_order']):
                 flash.set('MO Route with order %s already exists' % form.vars['mo_order'])
                 redirect(URL('manage_mo_routes'))
-            if not form.vars.mo_connectors and not form.vars.mo_http_cons:
+            if not form.vars['mo_connectors'] and not form.vars['mo_http_cons']:
                 flash.set('please select either HTTP or SMPP connector')
                 redirect(URL('mo_create', 'StaticMORoute'))
-            if form.vars.mo_connectors and form.vars.mo_http_cons:
+            if form.vars['mo_connectors'] and form.vars['mo_http_cons']:
                 flash.set('Please select either HTTP or SMPP connector not both')
                 redirect(URL('mo_create', 'RandomRoundrobinMORoute'))
             cc=''
-            if form.vars.mo_connectors:
-                for f in form.vars.mo_connectors:
+            if form.vars['mo_connectors']:
+                for f in form.vars['mo_connectors']:
                     cc += 'smpps('+db.connector[f].name+');'
             else:        
-                for f in form.vars.mo_http_cons:
+                for f in form.vars['mo_http_cons']:
                     cc += 'http('+db.http_cons[f].hcon_cid+');'
             cons = cc
             ff=''
-            for f in form.vars.mo_filters:
+            for f in form.vars['mo_filters']:
                 ff += db.mt_filter[f].fid
                 ff+=';'
             filters = ff
@@ -497,10 +497,10 @@ def mo_create(route_type):
             if not resp:
                 id = db.moroute.insert(**db.moroute._filter_fields(form.vars))
                 if id:
-                    flash.set('New Random Roundrobin MO route added with order %s' % form.vars.mo_order)
+                    flash.set('New Random Roundrobin MO route added with order %s' % form.vars['mo_order'])
                     redirect(URL('manage_mo_routes'))
                 else:
-                    flash.set('New Random Roundrobin MO route with order %s NOT ADDED TO DB' % form.vars.mo_order)
+                    flash.set('New Random Roundrobin MO route with order %s NOT ADDED TO DB' % form.vars['mo_order'])
             else:
                 flash.set('ERROR: %s ' % resp)
         elif form.errors:
@@ -515,23 +515,23 @@ def mo_create(route_type):
                     Field('mo_filters', 'list:reference mt_filter', requires=IS_IN_DB(db,'mt_filter.id','mt_filter.fid',multiple=True), label='Filter(s)', comment='Filters need to be added prior to adding routes. Please see filter management'),
         ], dbio=False, formstyle=FormStyleBulma)
         if form.accepted:
-            if not form.vars.mo_connectors and not form.vars.mo_http_cons:
+            if not form.vars['mo_connectors'] and not form.vars['mo_http_cons']:
                 flash.set('please select either HTTP or SMPP connector')
                 redirect(URL('mo_create', 'StaticMORoute'))
-            if form.vars.mo_connectors and form.vars.mo_http_cons:
+            if form.vars['mo_connectors'] and form.vars['mo_http_cons']:
                 flash.set('Please select either HTTP or SMPP connector not both')
                 redirect(URL('mo_create', 'FailoverMORoute'))
             cc=''
             cc=''
-            if form.vars.mo_connectors:
-                for f in form.vars.mo_connectors:
+            if form.vars['mo_connectors']:
+                for f in form.vars['mo_connectors']:
                     cc += 'smpps('+db.connector[f].name+');'
             else:        
-                for f in form.vars.mo_http_cons:
+                for f in form.vars['mo_http_cons']:
                     cc += 'http('+db.http_cons[f].hcon_cid+');'
             cons = cc
             ff=''
-            for f in form.vars.mo_filters:
+            for f in form.vars['mo_filters']:
                 ff += db.mt_filter[f].fid
                 ff+=';'
             filters = ff
@@ -541,10 +541,10 @@ def mo_create(route_type):
             if not resp:
                 id = db.moroute.insert(**db.moroute._filter_fields(form.vars))
                 if id:
-                    flash.set('New Failorver MO route added with order %s' % form.vars.mo_order)
+                    flash.set('New Failorver MO route added with order %s' % form.vars['mo_order'])
                     redirect(URL('manage_mo_routes'))
                 else:
-                    flash.set('New Failorver MO route with order %s NOT ADDED TO DB' % form.vars.mo_order)    
+                    flash.set('New Failorver MO route with order %s NOT ADDED TO DB' % form.vars['mo_order'])    
             else:
                 flash.set('ERROR: %s ' % resp)
         elif form.errors:
@@ -649,7 +649,7 @@ def manage_mo_routes():
                 Field('r_tpe',label='Mo Route Type', requires=IS_IN_SET(MOROUTE_TYPES))
                 ], dbio=False, formstyle = FormStyleBulma)
     if form.accepted:
-        redirect(URL('mo_create', form.vars.r_tpe))
+        redirect(URL('mo_create', form.vars['r_tpe']))
     routes=mo_routes()
     return dict(form=form, routes=routes)
 
