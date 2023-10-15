@@ -166,7 +166,7 @@ to reflect your setup.
 
 Once saved you can restart Py4Web and navigate to http://localhost:8000/jasmin_smsc_gui
 
-## Initialise the database
+## Initialize the database
 If you have an existing instance of Jasmin, once you have connected you can run the populate database function from the superadmin option which will import all current groups, users, connectors, filters etc from your working instance of Jasmin. 
 
 ## Authors
