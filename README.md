@@ -123,6 +123,10 @@ py4web setup apps
 py4web set_password
 py4web run apps
 ```
+Python 3.13 removed telnetlib from the standard library and the app needs it to talk to jcli. Install the backport too (pip skips it on Python 3.12 and older)
+```
+(py4web)$ python3 -m pip install "standard-telnetlib; python_version >= '3.13'"
+```
 ## First Run
 ```
 $ py4web run apps
